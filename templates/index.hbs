@@ -63,46 +63,36 @@
 </body>
 <script>
  
+
     $(document).ready(()=>{
         $('#submit-btn').click(function(event){
              event.preventDefault(); //prevent default action 
+             var data = {"description":"Lorem ips.lpa qui officia deserunt mollit anim id est laborum.", "name":"Tushar","emails": [
+                    "tushar@mailinator.com"
+                ],"meta": {
+                    "accountId": "2679138",
+                    "entityType": "ce_contactEnquiries"
+                }}
             $.ajax({
                 url: "https://liveapi-sandbox.yext.com/v2/accounts/me/entities?api_key=b262ae7768eec3bfa53bfca6d48e4000&v=20211229&entityTypes=ce_contactEnquiries",
-                data : {
-                    'data' : {
-                    "method":"createEntity",
-                        "data":{
-                            'yext_insert' : {
-                                 'name':'Dot',
-                                'name': $("#name").val(),
-                                  'email': $("#Email").val(),
-                                    'description': $("#Description").val(),
-    
-                            },
-                            
-                            'yext_config' : {
-                                'entityTypes' : 'ce_contactEnquiries' 
-                            }
-                        }
-                    },
-                    'debug':'1'
-                },
-                
                 type: "POST",
                 dataType: "json",
+                data: data,
                 beforeSend: function(){
-                    
+                  
+                   
                     $("#name").prop('disabled',true);
                     $('#submit-btn').prop('disabled',true);
                     $('#submit-btn').html('We Will Get Back to you');
                 },
-                success: function(result){
-                    $("#name").prop('disabled',false);
-                    console.log(result);
-                    if(result.status == 'success'){
-                    }
-                    $('#submit-btn').prop('disabled',false);
-                    $('#submit-btn').html('query successfully submited');
+                success: function(){
+                      console.log("testing");
+                     // $("#name").prop('disabled',false);
+                    // console.log(result);
+                    // if(result.status == 'success'){
+                    // }
+                    // $('#submit-btn').prop('disabled',false);
+                    // $('#submit-btn').html('query successfully submited');
                 },
                 error: function(err){
                     console.log(err.statusCode)
@@ -112,7 +102,6 @@
 
         
     });
-
 </script>
 
 
